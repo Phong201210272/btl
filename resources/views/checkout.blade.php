@@ -1,21 +1,12 @@
 @extends('layout/layout')
 @section('content')
-    {{--    <section class="breadcrumb_part">--}}
-    {{--        <div class="container">--}}
-    {{--            <div class="row">--}}
-    {{--                <div class="col-lg-12">--}}
-    {{--                    <div class="breadcrumb_iner">--}}
-    {{--                        <h2>checkout</h2>--}}
-    {{--                    </div>--}}
-    {{--                </div>--}}
-    {{--            </div>--}}
-    {{--        </div>--}}
-    {{--    </section>--}}
     <div class="billing_details">
         <div class="row">
             <div class="col-lg-8">
                 <h3>Billing Details</h3>
-                <form class="row contact_form" action="#" method="post" novalidate="novalidate">
+                <form class="row contact_form" action="{{ route('checkout') }}" method="post" novalidate="novalidate">
+                    @csrf
+                    <!-- Thêm các trường thông tin người dùng -->
                     <div class="col-md-6 form-group p_star">
                         <label>Full Name</label>
                         <input type="text" value="{{$nguoidung->tennd}}" class="form-control" id="last" name="name" />
@@ -46,35 +37,30 @@
                                 <span>Total</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="#">Fresh Blackberry
-                                <span class="middle">x 02</span>
-                                <span class="last">$720.00</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">Fresh Tomatoes
-                                <span class="middle">x 02</span>
-                                <span class="last">$720.00</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">Fresh Brocoli
-                                <span class="middle">x 02</span>
-                                <span class="last">$720.00</span>
-                            </a>
-                        </li>
+                        @foreach($chitiet as $item)
+                            <li>
+                                <a href="#">{{ $item['tensp'] }}
+                                    <span class="middle">{{ $item['soluong'] }}</span>
+                                    <span class="last">{{ $item['tongtien'] }} VND</span>
+                                </a>
+                            </li>
+                        @endforeach
                     </ul>
                     <ul class="list list_2">
                         <li>
                             <a href="#">Total
-                                <span>$2210.00</span>
+                                <span>{{ $sum }} VND</span>
                             </a>
                         </li>
                     </ul>
-                    <a class="btn_3" href="#">Proceed</a>
+                    <a class="btn_3" href="{{ route('checkout') }}">Proceed</a>
+                    @if(session('success'))
+                        <script>
+                            alert("{{ session('success') }}");
+                        </script>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
-    </div>
+@endsection

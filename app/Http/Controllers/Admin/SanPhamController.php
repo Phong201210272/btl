@@ -85,6 +85,7 @@ class SanPhamController extends Controller
 //        dd(session('machitiet'));
 //        dd($productdetailFind);
 //        dd($products);
+
         return view('edit', compact('productdetailFind'));
     }
 

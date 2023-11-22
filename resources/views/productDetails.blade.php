@@ -28,7 +28,7 @@
                         </div>
                     </div>
                 </div>
-                <form action="{{route('addcart')}}" method="post">
+                <form action="{{route('add-to-cart')}}" method="post">
                     <div class="col-lg-8">
                         <div class="single_product_text text-center">
 

@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class AddToCartController extends Controller
 {
-
     public function addtocart(Request $request)
     {
         $newProduct = [
@@ -19,7 +18,7 @@ class AddToCartController extends Controller
         ];
 
         if (session()->has('chitiet')) {
-            $gioHang = session('chitiet');
+            $gioHang = session('chitiet', []);
 
             // Kiểm tra xem sản phẩm đã tồn tại trong giỏ hàng hay chưa
             $existingProductIndex = $this->findProductIndex($gioHang, $newProduct);
@@ -63,5 +62,4 @@ class AddToCartController extends Controller
 
         return false;
     }
-    //        session()->forget('chitiet');
 }
